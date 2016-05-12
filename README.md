@@ -1,6 +1,5 @@
-# Appium development ENV Installtion with Vagrant and Ansible
+# WAID Android development ENV Installtion with Vagrant and Ansible
 
-Vagrant-ansible-hive will install Appium with android in the vagrant boxes provisioned with ansible and shell.
 
 ## Requirement
 
@@ -15,7 +14,7 @@ Vagrant-ansible-hive will install Appium with android in the vagrant boxes provi
 
 Once you ready clone the repo
 
-      $ cd vagrant-ansible-appium
+      $ cd vagrant-waid-android
       $ vagrant up
 
 This will install Ubuntu box with all neccessery libraries including
