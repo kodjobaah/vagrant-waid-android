@@ -1,22 +1,15 @@
-box      = 'phusion/ubuntu-14.04-amd64'
-version  = 2
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  #config.vm.provision :shell, :path => 'bootstrap.sh'
+  config.vm.provision :ansible do |ansible|
+     ansible.playbook = "playbook.yml"
+  end
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.hostname = "appium-ansible"
 
-Vagrant.configure(version) do |config|
-    config.vm.box = box
-
-    # Now let puppet do its thing.
-    config.vm.provision :puppet do |puppet|
-      puppet.manifests_path = 'puppet/manifests'
-      puppet.manifest_file = 'devenv.pp'
-      puppet.module_path = 'puppet/modules'
-      puppet.options = "--verbose"
-    end
-    
-
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
   config.vm.provider "virtualbox" do |vb|
     # Customize the amount of memory on the VM:
     vb.memory = "5048"
@@ -27,14 +20,8 @@ Vagrant.configure(version) do |config|
     # Display the VirtualBox GUI when booting the machine
     vb.gui = true
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional", "--vram", "256", "--accelerate3d", "on"]
+    vb.customize ['modifyvm', :id, '--usb', 'on']
+    vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
+    vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Galaxy Nexus', '--vendorid', '0x04e8']
   end
-
-  # Start Xorg on boot
- # Install xfce and virtualbox additions
-  config.vm.provision "shell", inline: "sudo apt-get update"
-  config.vm.provision "shell", inline: "sudo apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11"
-  # Permit anyone to start the GUI
-  config.vm.provision "shell", inline: "sudo sed -i 's/allowed_users=.*$/allowed_users=anybody/' /etc/X11/Xwrapper.config"
-
-  config.vm.provision "shell", inline: "sudo systemctl set-default graphical.target && sudo systemctl isolate graphical.target"
 end
