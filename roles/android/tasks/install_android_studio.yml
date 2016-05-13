@@ -1,0 +1,32 @@
+---
+
+- name: make download directory
+  file: path={{ tmp_dir }} state=directory mode=0777
+  sudo: yes
+
+- name: Android Studio | Download Android Studio archive
+  get_url:
+    url: "{{ android_studio_archive_url }}"
+    dest: "{{ tmp_dir }}"
+    #checksum is available starting ansible v2.0
+    #checksum: {{ android_studio_archive_checksum }}
+
+- name: Android Studio | Create Android Studio insallation folder
+  file:
+    path: "{{ android_studio_install_folder }}"
+    state: directory
+
+- name: check path
+  command: ls /var/tmp/android-studio
+
+- name: Android Studio | Unzip Android Studio to installation folder
+  unarchive:
+    src: "{{ tmp_dir }}/{{ android_studio_archive_name }}"
+    dest: "{{ android_studio_install_folder }}"
+    copy: no
+
+- name: Android Studio | Create desktop shortcut
+  template:
+    src: "../templates/android-studio.desktop"
+    dest: "~/Desktop"
+    mode: 0777

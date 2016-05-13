@@ -1,0 +1,9 @@
+---
+  - name: Common | Check whether JDK/JRE installed
+    command: java -version
+    register: is_jdk_installed
+    failed_when: is_jdk_installed.rc > 3
+
+  - name: Common | Install JDK
+    apt: name=default-jdk state=present update_cache=yes
+    when: is_jdk_installed.rc != 0

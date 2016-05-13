@@ -78,9 +78,7 @@ pip_packages:
   - percol # https://github.com/mooz/percol
 
 desktop_packages:
-  - baobab
-  #- classicmenu-indicator
-  #- cupscloudprint           # google cloud print, dead repo
+  - baobab # disk usage analyser
   - firefox
   - gimp
   - gparted
@@ -90,11 +88,10 @@ desktop_packages:
   - libreoffice
   - pinta                    # paint.net for linux
   - pidgin
-  #- purple-vk-plugin         # vk for pidgin
   - pulseaudio-module-bluetooth # http://askubuntu.com/questions/414258/successfully-connected-to-a-bluetooth-speaker-but-how-do-i-direct-sound-there
   - remmina                  # remote desktop
   - rhythmbox
-  #- shutter                  # screenshots
+  - shutter                  # screenshots
   - samba
   - synaptic
   - thunderbird
@@ -104,12 +101,11 @@ desktop_packages:
   - vim-gnome
   - vlc
   #- ubuntu-tweak
-  # - wine
   - unity-tweak-tool
   - gnome-search-tool
   - "myspell-{{ language }}"
   - compizconfig-settings-manager
-  #- sublime-text-installer
+  # - sublime-text-installer
   #- popcorn-time
 
 test_packages:

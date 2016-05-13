@@ -1,0 +1,4 @@
+---
+# This Playbook installs Android Studio on Ubuntu
+- include: install_dependencies.yml
+- include: install_android_studio.yml

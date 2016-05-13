@@ -1,0 +1,99 @@
+---
+# Installs various system tools
+- name: install libtool
+  apt: pkg=libtool update-cache=yes
+- name: install autoconf
+  apt: pkg=autoconf update-cache=yes
+- name: install automake
+  apt: pkg=automake update-cache=yes
+- name: install uuid
+  apt: pkg=uuid-dev update-cache=yes
+- name: install build-essentials
+  apt: pkg=build-essential update-cache=yes
+- name: install make
+  apt: pkg=make update-cache=yes
+- name: install curl
+  apt: pkg=curl update-cache=yes
+- name: install vim
+  apt: pkg=vim update-cache=yes
+- name: install htop
+  apt: pkg=htop update-cache=yes
+- name: install tree
+  apt: pkg=tree update-cache=yes
+
+# Java
+- name: Install add-apt-repostory
+  sudo: yes
+  apt: name=software-properties-common state=latest
+
+- name: Add Oracle Java Repository
+  sudo: yes
+  apt_repository: repo='ppa:webupd8team/java'
+
+- name: Accept Java 8 License
+  sudo: yes
+  debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+
+- name: Install Oracle Java 8
+  sudo: yes
+  apt: name={{item}} state=latest
+  with_items:
+    - oracle-java8-installer
+    - ca-certificates
+    - oracle-java8-set-default
+
+# Scala
+- name: Create scala lib dir
+  file: path={{scala_lib_path}} state=directory
+
+- name: Clean existing Scala {{scala_version_name}} if it exists
+  file: path={{scala_lib_path_target}} state=absent
+
+- name: Download scala v{{scala_version}}
+  get_url: url={{scala_download_url}} 
+    dest=/tmp/{{scala_archive_file}}
+    force=no
+
+- name: Unpack Scala
+  command: tar -xvf {{scala_archive_file}} chdir=/tmp/
+
+- name: Move (by force) Scala to lib
+  command: mv /tmp/{{scala_version_name}} {{scala_lib_path_target}} chdir=/tmp/
+
+- name: Link scala
+  command: ln -sf {{scala_lib_path_target}}/bin/scala {{scala_link_target}}
+
+- name: Link scalac
+  command: ln -sf {{scala_lib_path_target}}/bin/scalac {{scala_link_target}}
+
+- name: Link fsc
+  command: ln -sf {{scala_lib_path_target}}/bin/fsc {{scala_link_target}}
+
+- name: Link sbaz
+  command: ln -sf {{scala_lib_path_target}}/bin/sbaz {{scala_link_target}}
+
+- name: Link sbaz-setup
+  command: ln -sf {{scala_lib_path_target}}/bin/sbaz-setup {{scala_link_target}}
+
+- name: Link scaladoc
+  command: ln -sf {{scala_lib_path_target}}/bin/scaladoc {{scala_link_target}}
+
+- name: Link scalap
+  command: ln -sf {{scala_lib_path_target}}/bin/scalap {{scala_link_target}}
+
+#sbt
+- name: Create /opt/src
+  file: path=/opt/src state=directory recurse=yes
+
+- name: Create lib dir
+  file: path={{sbt_lib_path_target}} state=directory recurse=yes
+
+- name: Download sbt v{{sbt_version}}
+  get_url: url={{sbt_download_url}} 
+    dest=/opt/src/{{sbt_archive_file}}
+
+- name: Unpack sbt
+  unarchive: src=/opt/src/{{sbt_archive_file}} dest={{sbt_lib_path_target}} copy=no
+
+- name: Link sbt
+  file: state=link src={{sbt_lib_path_target}}/sbt/bin/sbt dest={{sbt_link_target}}
