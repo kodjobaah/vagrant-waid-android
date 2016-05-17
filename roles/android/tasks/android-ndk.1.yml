@@ -1,0 +1,13 @@
+---
+   - name: download Android NDK
+     get_url: dest={{ ansible_cache_dir }} url=http://dl.google.com/android/repository/{{ android_ndk_zipfile }} timeout=3000
+     sudo: yes
+
+   - name: unpack Android NDK
+     unarchive: copy=no src={{ ansible_cache_dir }}/{{ android_ndk_zipfile }} dest=/opt/android creates=/opt/android/{{ android_ndk_folder }}
+     sudo: yes 
+
+   - name: chown files
+     file: path=/opt/android/{{ android_ndk_folder }} recurse=yes state=directory 
+
+   - include: install_on_ubuntu.yml

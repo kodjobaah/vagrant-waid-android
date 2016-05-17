@@ -1,0 +1,75 @@
+---
+   - user: name=vagrant group=admin
+   - name: update apt cache
+     apt: update_cache=yes
+
+   - name: install required packages require for appium android
+     apt: name={{ item }} state=present
+     with_items:
+        - python-software-properties
+        - nodejs
+        - node
+        - npm
+        - curl
+        - wget
+        - make
+        - g++
+        - gcc
+        - git
+        - unzip
+        - openjdk-6-jre
+        - patch
+        - bzip2
+        - build-essential
+        - openssl
+        - libcurl4-openssl-dev
+        - libsasl2-2
+        - libsasl2-dev
+        - libcurl3
+        - libreadline6
+        - libreadline6-dev
+        - git-core
+        - zlib1g
+        - zlib1g-dev
+        - libssl-dev
+        - libyaml-dev
+        - libsqlite3-dev
+        - sqlite3
+        - libxml2-dev
+        - libxslt1-dev
+        - libxslt-dev
+        - autoconf
+        - libc6-dev
+        - libgdbm-dev
+        - ncurses-dev
+        - automake
+        - libtool
+        - bison
+        - subversion
+        - pkg-config
+        - libffi-dev
+        - libcurl3-dev
+        - imagemagick
+        - libmagickwand-dev
+        - libpcre3-dev
+   - name: update apt cache
+     apt: update_cache=yes
+
+   - name: Install Ruby Gems
+     gem: name={{item}} state=latest
+     with_items:
+       - bundler
+       - rake
+
+   - gem: name=rake state=latest
+   - gem: name=bundler state=latest
+
+   - name: install ant
+     action: apt name=ant state=latest
+
+   - name: source bashrc
+     file: path=/home/vagrant/.bashrc state=touch mode="u=rw,g=r,o=r"
+     
+   - name: make download directory 
+     file: path={{ ansible_cache_dir }} state=directory mode=0777
+     sudo: yes
