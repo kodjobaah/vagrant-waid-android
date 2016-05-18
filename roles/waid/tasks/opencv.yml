@@ -1,0 +1,5 @@
+ - name: download opencv
+   get_url: url=http://downloads.sourceforge.net/project/opencvlibrary/opencv-android/3.1.0/OpenCV-3.1.0-android-sdk.zip dest=/opt/ansible_cache
+
+ - name: unpack opencv
+   unarchive: src=/opt/ansible_cache/OpenCV-3.1.0-android-sdk.zip dest=/opt/android copy=no

@@ -1,0 +1,12 @@
+ - name: copy android config file
+   copy: src=../files/Android.mk dest=/opt/ansible_cache
+
+ - name: update project_home
+   replace: dest=/opt/ansible_cache/Android.mk regexp=project_home replace=/opt
+
+ - name: update opencv home
+   replace: dest=/opt/ansible_cache/Android.mk regexp=open_cv_sdk replace=/opt/android/OpenCV-android-sdk
+
+ - name: replace android.mk
+   command: mv /opt/ansible_cache/Android.mk /opt/waid/android/WAID/app/src/main/jni 
+  

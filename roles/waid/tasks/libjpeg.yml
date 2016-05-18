@@ -1,0 +1,4 @@
+---
+
+   - name: unpack file
+     unarchive: src=../files/libjpeg-turbo-1.4.90.tar.gz dest=/opt/waid/android/WAID/app/src/main/jni  

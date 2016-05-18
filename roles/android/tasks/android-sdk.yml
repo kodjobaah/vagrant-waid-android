@@ -1,0 +1,56 @@
+--- 
+ 
+   - name: download Android SDK 
+     get_url: dest={{ ansible_cache_dir }} url=http://dl.google.com/android/{{ android_zipfile }} 
+     sudo: yes 
+ 
+   - name: make opt dir for user 
+     file: path=/opt/android/ state=directory mode=0777 
+     sudo: yes 
+ 
+   - name: unpack Android SDK 
+     unarchive: copy=no src={{ ansible_cache_dir }}/{{ android_zipfile }} dest=/opt/android/ creates=/opt/android/{{ android_folder }} 
+     sudo: yes 
+ 
+   - name: chown files 
+     file: path=/opt/android/{{ android_folder }} recurse=yes state=directory 
+ 
+   - name: install android platform-tools 
+     shell: "echo y | /opt/android/android-sdk-linux/tools/android update sdk --no-ui --all --filter {{ item }}" 
+     with_items: 
+        - "tools" 
+        - "platform-tools" 
+        - "build-tools-22.0.1" 
+        - "build-tools-21.1.2" 
+        - "build-tools-19.1.0" 
+        - "android-21" 
+        - "android-20" 
+        - "android-19" 
+        - "sys-img-x86-android-21" 
+        - "sys-img-x86-android-19" 
+        - "sys-img-armeabi-v7a-android-19" 
+        - "addon-google_apis-google-22" 
+        - "extra-android-support" 
+        - "extra-google-m2repository" 
+        - "extra-google-google_play_services" 
+        - "extra-android-m2repository"
+
+   - name: add ANDROID_HOME 
+     action: lineinfile dest=/home/vagrant/.bashrc line="{{ item }}" 
+     with_items: 
+        - 'export ANDROID_HOME=/opt/{{ android_folder }}' 
+ 
+        - 'export ANDROID_TOOLS=$ANDROID_HOME/tools/' 
+ 
+        - 'export ANDROID_PLATFORM_TOOLS=$ANDROID_HOME/platform-tools/' 
+ 
+        - 'export PATH=$PATH:$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS' 
+     sudo: no 
+ 
+   - name: Copy android rules file 
+     copy: src=android.rules dest=/etc/udev/rules.d/51-android.rules owner=root mode="0644" 
+ 
+   - name: restart udev 
+     service: name=udev state=restarted 
+ 
+

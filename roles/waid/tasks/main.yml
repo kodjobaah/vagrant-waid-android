@@ -14,3 +14,9 @@
 
 - name: Checkout waid project
   git: repo=https://github.com/kodjobaah/waid.git dest=/opt/waid clone=yes 
+
+- include: libjpeg.yml 
+
+- include: opencv.yml 
+
+- include: update-android-mk.yml 
