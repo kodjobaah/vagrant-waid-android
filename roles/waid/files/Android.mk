@@ -1,7 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 #OPENCV_SDK :=  /Users/kodjobaah/software/opencv/3.0.0/OpenCV-android-sdk
 #OPENCV_SDK :=   /Users/kodjobaah/software/opencv/3.0.0.RC2/OpenCV-android-sdk
-OPENCV_SDK := open_cv_sdk 
 PROJECT_HOME := project_home
 include $(CLEAR_VARS)
 
@@ -11,7 +10,7 @@ OPENCV_INSTALL_MODULES:=on
 WITH_TBB=ON
 #OPENCV_LIB_TYPE:=STATIC
 OPENCV_LIB_TYPE:=SHARED
-include $(OPENCV_SDK)/sdk/native/jni/OpenCV.mk
+include open_cv_sdk/sdk/native/jni/OpenCV.mk
 
 # ZeroMQ
 LOCAL_MODULE := libzmq

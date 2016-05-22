@@ -2,3 +2,5 @@ ssh_known_hosts_command: "ssh-keyscan -H -T 10"
 ssh_known_hosts_file: "/etc/ssh/ssh_known_hosts"
 ssh_known_hosts:
   - github.com
+jpeg_turbo: "libjpeg-turbo-1.4.90"
+opencv_sdk_folder: "OpenCV-android-sdk"

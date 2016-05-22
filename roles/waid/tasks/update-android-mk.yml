@@ -5,8 +5,24 @@
    replace: dest=/opt/ansible_cache/Android.mk regexp=project_home replace=/opt
 
  - name: update opencv home
-   replace: dest=/opt/ansible_cache/Android.mk regexp=open_cv_sdk replace=/opt/android/OpenCV-android-sdk
+   replace: dest=/opt/ansible_cache/Android.mk regexp=open_cv_sdk replace=/opt/android/{{opencv_sdk_folder}}
 
  - name: replace android.mk
    command: mv /opt/ansible_cache/Android.mk /opt/waid/android/WAID/app/src/main/jni 
+
+ - name: copy jpeg-turbo Android.mk
+   copy: src=../files/Android.mk.libjpeg-turbo dest=/opt/waid/android/WAID/app/src/main/jni/{{jpeg_turbo}}/Android.mk
+
+ - name: copy native Android.mk
+   copy: src=../files/Android.mk.native dest=/opt/ansible_cache
+
+ - name: update project_home native
+   replace: dest=/opt/ansible_cache/Android.mk.native regexp=project_home replace=/opt
+
+ - name: update opencv home native
+   replace: dest=/opt/ansible_cache/Android.mk.native regexp=open_cv_sdk replace=/opt/android/{{opencv_sdk_folder}}
+
+ - name: replace native Android.mk
+   command: mv /opt/ansible_cache/Android.mk.native /opt/waid/android/WAID/app/src/main/jni/native/Android.mk 
+
   

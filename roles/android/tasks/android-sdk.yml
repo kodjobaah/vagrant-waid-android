@@ -38,7 +38,7 @@
    - name: add ANDROID_HOME 
      action: lineinfile dest=/home/vagrant/.bashrc line="{{ item }}" 
      with_items: 
-        - 'export ANDROID_HOME=/opt/{{ android_folder }}' 
+        - 'export ANDROID_HOME=/opt/android/{{ android_folder }}' 
  
         - 'export ANDROID_TOOLS=$ANDROID_HOME/tools/' 
  

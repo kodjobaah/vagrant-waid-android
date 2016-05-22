@@ -3,3 +3,6 @@
 
  - name: unpack opencv
    unarchive: src=/opt/ansible_cache/OpenCV-3.1.0-android-sdk.zip dest=/opt/android copy=no
+
+ - name: chown files
+   file: path=/opt/android/{{ opencv_sdk_folder }} recurse=yes state=directory group=vagrant owner=vagrant

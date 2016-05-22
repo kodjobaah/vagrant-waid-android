@@ -9,3 +9,12 @@
 
    - name: chown files
      file: path=/opt/android/{{ android_ndk_folder }} recurse=yes state=directory 
+
+   - name: add ANDROID_NDK_HOME
+     action: lineinfile dest=/home/vagrant/.bashrc line="{{ item }}"
+     with_items:
+        - 'export ANDROID_NDK=/opt/android/{{ android_ndk_folder }}'
+
+        - 'export PATH=$PATH:$ANDROID_NDK'
+     sudo: no
+
