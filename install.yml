@@ -6,7 +6,7 @@
     - vars/main.yml
 
   roles:
-      #- development
-      #- desktop
-      #- android
+#      - development
+#      - desktop
+#      - android
       - waid

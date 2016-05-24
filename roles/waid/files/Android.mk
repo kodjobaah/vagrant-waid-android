@@ -19,7 +19,7 @@ LOCAL_EXPORT_C_INCLUDES :=  ${PROJECT_HOME}/waid/android/WAID/app/src/main/jni/z
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
-include ${PROJECT_HOME}/waid/android/WAID/app/src/main/jni/libjpeg-turbo/Android.mk
+include ${PROJECT_HOME}/waid/android/WAID/app/src/main/jni/vendor/Android.mk
 
 #include $(CLEAR_VARS)
 #include ${PROJECT_HOME}/waid/android/WAID/app/src/main/jni/msgpack-c/Android.mk

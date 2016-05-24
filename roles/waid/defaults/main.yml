@@ -4,3 +4,4 @@ ssh_known_hosts:
   - github.com
 jpeg_turbo: "libjpeg-turbo-1.4.90"
 opencv_sdk_folder: "OpenCV-android-sdk"
+jni_home: /opt/waid/android/WAID/app/src/main/jni
