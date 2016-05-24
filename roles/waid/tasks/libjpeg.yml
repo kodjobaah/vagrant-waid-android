@@ -1,7 +1,10 @@
 ---
 
+   - name: unpack directory structure
+     unarchive: src=../files/libjpeg-folders.tar.gz dest=/opt/waid/android/WAID/app/src/main/jni  
+
    - name: unpack file
-     unarchive: src=../files/libjpeg-turbo-1.4.90.tar.gz dest=/opt/waid/android/WAID/app/src/main/jni  
+     unarchive: src=../files/libjpeg-turbo-1.4.90.tar.gz dest=/opt/waid/android/WAID/app/src/main/jni/vendor/libjpeg-turbo  
 
    - name: chown files
-     file: path=/opt/waid/android/WAID/app/src/main/jni/{{jpeg_turbo}} recurse=yes state=directory
+     file: path=/opt/waid/android/WAID/app/src/main/jni/vendor recurse=yes state=directory
