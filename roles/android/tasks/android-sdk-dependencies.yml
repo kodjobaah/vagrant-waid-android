@@ -53,6 +53,10 @@
         - libmagickwand-dev
         - libpcre3-dev
         - android-tools-adb
+        - lib32z1
+        - lib32stdc++6
+
+
 
    - name: update apt cache
      apt: update_cache=yes
