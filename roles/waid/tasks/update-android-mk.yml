@@ -7,11 +7,13 @@
  - name: update opencv home
    replace: dest=/opt/ansible_cache/Android.mk regexp=open_cv_sdk replace=/opt/android/{{opencv_sdk_folder}}
 
+ - name: update jpeg-turbo Android.mk
+   replace: dest=/opt/ansible_cache/Android.mk regexp=jpeg_turbo_version replace={{jpeg_turbo}}
+
  - name: replace android.mk
    command: mv /opt/ansible_cache/Android.mk /opt/waid/android/WAID/app/src/main/jni 
 
- - name: copy jpeg-turbo Android.mk
-   copy: src=../files/Android.mk.libjpeg-turbo dest=/opt/waid/android/WAID/app/src/main/jni/{{jpeg_turbo}}/Android.mk
+ - file: path=/opt/waid/android/WAID/app/src/main/jni/Android.mk owner=vagrant group=vagrant mode=0644
 
  - name: copy native Android.mk
    copy: src=../files/Android.mk.native dest=/opt/ansible_cache
@@ -19,10 +21,38 @@
  - name: update project_home native
    replace: dest=/opt/ansible_cache/Android.mk.native regexp=project_home replace=/opt
 
+ - name: update jpeg-turbo native 
+   replace: dest=/opt/ansible_cache/Android.mk.native regexp=jpeg_turbo_version replace={{jpeg_turbo}}
+
  - name: update opencv home native
-   replace: dest=/opt/ansible_cache/Android.mk.native regexp=open_cv_sdk replace=/opt/android/{{opencv_sdk_folder}}
+   replace: dest=/opt/ansible_cache/Android.mk.native regexp=opencv_sdk replace=/opt/android/{{opencv_sdk_folder}}
+
+ - name: update jni home 
+   replace: dest=/opt/ansible_cache/Android.mk.native regexp=jni_directory replace={{jni_home}}
 
  - name: replace native Android.mk
    command: mv /opt/ansible_cache/Android.mk.native /opt/waid/android/WAID/app/src/main/jni/native/Android.mk 
 
-  
+ - file: path=/opt/waid/android/WAID/app/src/main/jni/native/Android.mk owner=vagrant group=vagrant mode=0644
+
+ - name: copy crypto Android.mk
+   copy: src=../files/Android.mk.crypto dest=/opt/ansible_cache
+
+ - name: update jni directory 
+   replace: dest=/opt/ansible_cache/Android.mk.crypto regexp=jni_directory replace={{jni_home}}
+
+ - name: replace crypto Android.mk 
+   command: mv /opt/ansible_cache/Android.mk.crypto /opt/waid/android/WAID/app/src/main/jni/android-external-openssl-ndk-static/crypto/Android.mk 
+
+ - file: path=/opt/waid/android/WAID/app/src/main/jni/android-external-openssl-ndk-static/crypto/Android.mk owner=vagrant group=vagrant mode=0644
+
+ - name: copy ssl Android.mk
+   copy: src=../files/Android.mk.ssl dest=/opt/ansible_cache
+
+ - name: update jni directory 
+   replace: dest=/opt/ansible_cache/Android.mk.ssl regexp=jni_directory replace={{jni_home}}
+
+ - name: replace ssl Android.mk 
+   command: mv /opt/ansible_cache/Android.mk.ssl /opt/waid/android/WAID/app/src/main/jni/android-external-openssl-ndk-static/ssl/Android.mk 
+
+ - file: path=/opt/waid/android/WAID/app/src/main/jni/android-external-openssl-ndk-static/ssl/Android.mk owner=vagrant group=vagrant mode=0644
