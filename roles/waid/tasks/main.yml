@@ -23,3 +23,5 @@
 - include: opencv.yml 
 
 - include: update-android-mk.yml 
+
+- include: zeromq.yml
