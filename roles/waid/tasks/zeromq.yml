@@ -1,0 +1,7 @@
+---
+
+   - name: unpack directory structure
+     unarchive: src=../files/cppzmq.tar.gz dest=/opt/waid/android/WAID/app/src/main/jni  
+
+   - name: chown files
+     file: path=/opt/waid/android/WAID/app/src/main/jni/cppzmq recurse=yes state=directory
