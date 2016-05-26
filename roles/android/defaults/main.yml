@@ -6,7 +6,7 @@ android_folder:  "android-sdk-linux"
 
 # NDK
 android_ndk_version: "10.2.1"
-android_ndk_zipfile: "crystax-ndk-{{android_ndk_version}}-linux-x86_64.tar.xz" 
+android_ndk_zipfile: "crystax-ndk-{{android_ndk_version}}-linux-x86_64.tar.bz2" 
 android_ndk_folder:  "crystax-ndk-{{android_ndk_version}}"
 
 # Android Studio
