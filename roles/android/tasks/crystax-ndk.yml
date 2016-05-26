@@ -1,6 +1,6 @@
 ---
    - name: download Android NDK
-     get_url: dest={{ ansible_cache_dir }} url=https://www.crystax.net/download/{{ android_ndk_zipfile }} timeout=3000
+     get_url: dest={{ ansible_cache_dir }} url=https://www.crystax.net/download/{{ android_ndk_zipfile }} validate_certs=no timeout=3000
      sudo: yes
 
    - name: unpack Android NDK
