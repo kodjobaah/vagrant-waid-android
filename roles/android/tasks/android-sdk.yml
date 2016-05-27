@@ -13,7 +13,7 @@
      sudo: yes 
  
    - name: chown files 
-     file: path=/opt/android/{{ android_folder }} recurse=yes state=directory 
+     file: path=/opt/android/{{ android_folder }} owner=vagrant group=vagrant recurse=yes state=directory 
  
    - name: install android platform-tools 
      shell: "echo y | /opt/android/android-sdk-linux/tools/android update sdk --no-ui --all --filter {{ item }}" 
