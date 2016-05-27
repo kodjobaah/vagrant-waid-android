@@ -10,8 +10,8 @@ android_ndk_zipfile: "crystax-ndk-{{android_ndk_version}}-linux-x86_64.tar.bz2"
 android_ndk_folder:  "crystax-ndk-{{android_ndk_version}}"
 
 # Android Studio
-android_studio_archive_version: 1.4.0.10
-android_studio_archive_name: android-studio-ide-141.2288178-linux.zip
+android_studio_archive_version: 2.2.0.0
+android_studio_archive_name: android-studio-ide-145.2878421-linux.zip
 android_studio_archive_url: https://dl.google.com/dl/android/studio/ide-zips/{{ android_studio_archive_version }}/{{ android_studio_archive_name }}
 android_studio_archive_checksum: 137e3734f2e8e285bd7c1d2fae2e8548d0f164bd
 android_studio_install_folder: /opt
