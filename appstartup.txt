@@ -1,0 +1,15 @@
+ssh kodjo@85.159.215.185
+bash
+
+Starting the waid-app
+cd waid-app/target/universal/stage/bin/
+nohup ./waid-app &
+
+starting the stream builder
+cd waid-stream-builder/target/waid-stream-builder-1.0/usr/share/waid-stream-builder/bin/
+nohup ./waid-stream-builder -Djava.library.path=/usr/local/lib &
+
+starting the video streamer
+cd waid-video-streamer/target/waid-video-streamer-0.1/usr/share/waid-video-streamer/bin/
+nohup ./waid-video-streamer &
+
